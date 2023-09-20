@@ -100,11 +100,9 @@ planRouter.put(
         return res.status(400).json(response);
       }
 
-      console.log(`Updating plan with ID: ${planId}`);
       const updatedPlan = await PlanRepository.updatePlan(planId, updatedData);
 
       if (!updatedPlan) {
-        console.log(`Plan with ID ${planId} not found.`);
         const response = formatResponse(
           {},
           "Plano não encontrado.",
@@ -114,7 +112,6 @@ planRouter.put(
         return res.status(404).json(response);
       }
 
-      console.log(`Plan with ID ${planId} updated successfully.`);
       const response = formatResponse(
         { plan: updatedPlan },
         "Plano atualizado com sucesso",
@@ -123,8 +120,7 @@ planRouter.put(
       );
       return res.status(200).json(response);
     } catch (error) {
-      console.error("Error updating plan:", error);
-      const response = formatResponse({}, "Error updating plan", 500, "error");
+      const response = formatResponse({}, "Erro ao atualizar o plano", 500, "error");
       return res.status(500).json(response);
     }
   }
@@ -166,7 +162,6 @@ planRouter.delete(
         return res.status(404).json(response);
       }
     } catch (error) {
-      console.error("Error deleting plan:", error);
       const response = formatResponse(
         {},
         "Erro ao deletar plano",

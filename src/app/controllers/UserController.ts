@@ -40,7 +40,6 @@ userRouter.post(
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Create a new instance of the user
       const newUser = new User();
       newUser.name = name;
       newUser.email = email;
@@ -104,7 +103,6 @@ userRouter.post(
       );
       return res.status(200).json(response);
     } catch (error) {
-      console.error("Erro ao fazer login:", error);
       const response = formatResponse({}, "Erro ao fazer login", 500, "error");
       return res.status(500).json(response);
     }
@@ -124,7 +122,6 @@ userRouter.get("/", async (_req: Request, res: Response): Promise<Response> => {
     );
     return res.status(200).json(response);
   } catch (error) {
-    console.error("Erro ao buscar usuários:", error);
     const response = formatResponse(
       {},
       "Erro ao buscar usuários",
@@ -146,38 +143,33 @@ userRouter.put(
       if (!userId) {
         const response = formatResponse(
           {},
-          "User ID is required.",
+          "ID do usuário obrigatório.",
           400,
           "validation_error"
         );
         return res.status(400).json(response);
       }
-
-      console.log(`Updating user with ID: ${userId}`);
       const updatedUser = await UserRepository.updateUser(userId, updatedData);
 
       if (!updatedUser) {
-        console.log(`User with ID ${userId} not found.`);
         const response = formatResponse(
           {},
-          "User not found.",
+          "Usuário não encontrado",
           404,
           "not_found"
         );
         return res.status(404).json(response);
       }
 
-      console.log(`User with ID ${userId} updated successfully.`);
       const response = formatResponse(
         { user: updatedUser },
-        "User updated successfully",
+        "Usuário atualizado com sucesso",
         200,
         "success"
       );
       return res.status(200).json(response);
     } catch (error) {
-      console.error("Error updating user:", error);
-      const response = formatResponse({}, "Error updating user", 500, "error");
+      const response = formatResponse({}, "Erro ao atualizar usuário", 500, "error");
       return res.status(500).json(response);
     }
   }
@@ -219,7 +211,6 @@ userRouter.delete(
         return res.status(404).json(response);
       }
     } catch (error) {
-      console.error("Error deleting user:", error);
       const response = formatResponse(
         {},
         "Erro ao deletar usuário",

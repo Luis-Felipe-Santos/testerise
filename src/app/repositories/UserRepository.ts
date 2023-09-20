@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const userRepository = AppDataSource.getRepository(User);
-const secretKey = process.env.SECRET_KEY || "your-secret-key"; // Certifique-se de definir a chave secreta corretamente.
+const secretKey = process.env.SECRET_KEY || "your-secret-key"; 
 
 
 const getUsers = async (): Promise<IUser[]> => {
@@ -101,7 +101,7 @@ const deleteUser = async (
     });
 
     if (user) {
-      const deletedUser = { ...user }; // Create a copy of the user object
+      const deletedUser = { ...user }; 
       await userRepository.remove(user);
       return { success: true, deletedUser };
     } else {
