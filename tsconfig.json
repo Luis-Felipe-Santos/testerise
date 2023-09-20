@@ -1,0 +1,17 @@
+{
+   "compilerOptions": {
+      "esModuleInterop": true,
+      "lib": [
+         "es6"
+      ],
+      "typeRoots": ["./types", "./node_modules/@types"],
+      "types": ["node"],
+      "target": "es6",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "./build",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true
+   }
+}
